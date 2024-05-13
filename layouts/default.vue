@@ -6,8 +6,8 @@
       
       <v-toolbar-title  >{{ $t(title) }}</v-toolbar-title>
       <v-spacer />
-      <div v-for="data in items" :key="data" elevation="0" >
-        <v-btn icon :to="localePath(data.to)">{{$t(data.title)}}</v-btn>
+      <div v-for="data in items" :key="data" elevation="0" class="px-4">
+        <p class="pt-2" style="cursor: pointer;"  icon @click="moveTo(data.to)">{{$t(data.title)}}</p>
         
       </div>
       <v-spacer></v-spacer>
@@ -66,6 +66,13 @@ export default {
       rightDrawer: false,
       title: "APBANK"
     };
+  }, 
+  methods:{
+    moveTo(to){
+    //  console.log(to)h
+    this.$router.push(localeLocation(to))
+
+    }
   }
 };
 </script>
