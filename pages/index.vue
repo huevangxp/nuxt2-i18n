@@ -1,70 +1,46 @@
 <template>
- <div :class="{sticky: sticky}">
-  
-   <v-card>
-    <v-tabs
-    v-model="tab"
-    background-color="primary"
-    dark
-    flat
-      grow
-      show-arrows
-    >
-      <v-tab @click="toggleMenu(1)" :value="1">About</v-tab>
-      <v-tab @click="toggleMenu(2)" :value="2">Currency</v-tab>
-      <v-tab @click="toggleMenu(3)" :value="3">Tab 2</v-tab>
-      <v-tab @click="toggleMenu(4)" :value="4">Tab 2</v-tab>
-      <v-tab @click="toggleMenu(5)" :value="5">Tab 2</v-tab>
-    </v-tabs>
-   </v-card>
-   
+  <div class = 'd-flex justify-center' style="margin-top: 200px">
 
-<div v-if="showMenuTab1">
-  <p>This is the content for Tab 1.</p>
-</div>
-<v-card v-if="showMenuTab2" class='primary white--text'>
- <v-card-text>
-  <li v-for="(data, idx) in 10" :key="idx" class="white--text">
-    huevang {{idx + 1}}
-  </li>
- </v-card-text>
-</v-card>
- </div>
+    <h1   class="card text">{{currentTime}}</h1>
+
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      tab: null,
-      showMenuTab1: false,
-      showMenuTab2: false
+      currentTime: null,
     };
   },
+  mounted() {
+    this.startClock();
+  },
   methods: {
-    toggleMenu(tabNumber) {
-      if (tabNumber === 1) {
-        this.showMenuTab1 = !this.showMenuTab1;
-        this.showMenuTab2 = false; // Hide menu for tab 2
-      } else if (tabNumber === 2) {
-        this.showMenuTab2 = !this.showMenuTab2;
-        this.showMenuTab1 = false; // Hide menu for tab 1
-      }
-    }
-  }
+    startClock() {
+      setInterval(() => {
+        this.currentTime = new Date().toLocaleTimeString();
+      }, 1000);
+    },
+  },
 };
 </script>
 
-<style scoped>
-.header{
-  position: relative;
-  z-index:99999
+<style>
+.card{
+  transition: transform 6s ease-in-out;
+  color: teal;
 }
-  .sticky{
-    position:fixed;
-    top:7.5%;
-    width: 98%;
-    margin-left: -22px;
-    box-shadow: 0 0 10px rgba(0,0,0, 0.1);
-  }
+.card:hover{
+  transform: scale(1.10);
+}
+.text {
+  background-image: url('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg');
+  background-size: cover;
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+  font-size:250px;
+
+}
 </style>
